@@ -20,12 +20,16 @@ package imageviewer.views.UIUtils.buttons
 			_onClickHandler	 	= onClickHandler;
 			_onClickParams		= onClickParams;
 			addEventListener(MouseEvent.CLICK, onMouseClick);
+			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			_enable				= true;
 		}
 		
 		public function destroy():void
 		{
-			removeEventListener(MouseEvent.CLICK, onMouseClick);			
+			removeEventListener(MouseEvent.CLICK, onMouseClick);	
+			removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			_onClickHandler 	= null;
 			_onClickParams  	= null;
 			if (parent)
@@ -42,12 +46,24 @@ package imageviewer.views.UIUtils.buttons
 			return _enable;
 		}
 		
-		private function onMouseClick(e:MouseEvent):void 
+		protected function onMouseClick(e:MouseEvent):void 
 		{
 			if (!_enable)
 				return;
 			_onClickHandler.apply(this, _onClickParams);
 		}
+		
+		protected function onMouseOut(e:MouseEvent):void 
+		{
+			
+		}
+		
+		protected function onMouseOver(e:MouseEvent):void 
+		{
+			
+			
+		}
+		
 		
 	}
 

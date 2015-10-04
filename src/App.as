@@ -29,6 +29,8 @@ package
 			_context.install(MVCSBundle, ContextViewExtension, SignalCommandMapExtension);
 			_context.configure(new ContextView(this), ContextConfig);
 			_context.initialize();
+			
+			
 		}
 		
 	}

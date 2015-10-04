@@ -50,10 +50,13 @@ package imageviewer.views.UIUtils.imageview
 		{
 			removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			TweenMax.killTweensOf(this);
+			graphics.clear();
 			removeChild(_bitmap);
 			_bitmap = null;
 			_onClick.removeAll();
 			_onClick = null;
+			if (parent)
+				parent.removeChild(this);
 		}
 		
 		public function show(onComplete:Function=null):void 

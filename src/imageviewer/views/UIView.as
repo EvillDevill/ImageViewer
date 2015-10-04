@@ -1,11 +1,13 @@
 package imageviewer.views 
 {
+	import com.greensock.easing.Back;
 	import com.greensock.TweenMax;
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
+	import flash.system.System;
 	import imageviewer.views.UIUtils.buttons.PushButton;
 	import imageviewer.views.UIUtils.imageview.BitmapViewFactory;
 	import imageviewer.views.UIUtils.imageview.IImageView;
@@ -20,8 +22,8 @@ package imageviewer.views
 		private var _nextImgBtn		:PushButton;
 		private var _prevImgBtn		:PushButton;
 		private var _currentImg		:IImageView;
-		private var _imgFactory		:BitmapViewFactory;
 		private var _nextImg		:IImageView;
+		private var _imgFactory		:BitmapViewFactory;
 		private var _enable			:Boolean;
 		public function UIView() 
 		{
@@ -29,34 +31,13 @@ package imageviewer.views
 			_enable		= true;
 			_imgFactory = new BitmapViewFactory();
 			addEventListener(Event.ADDED_TO_STAGE, create);
-			//create();
 		}
 		
-		private function create(e:Event):void
-		{
-			removeEventListener(Event.ADDED_TO_STAGE, create);
-			dispatchEvent(new UIEvent(UIEvent.START_UP, null));
-			//_startUp.dispatch();
-			x = int(stage.stageWidth * .5);
-			y = int(stage.stageHeight * .5);
-			
-			_nextImgBtn 	= new PushButton(LIB_ArrowButton, switchIMGHandler, 1);
-			_nextImgBtn.x 	= int( stage.stageWidth * .5 - 50 );
-			addChild(_nextImgBtn);
-			
-			_prevImgBtn 	= new PushButton(LIB_ArrowButton, switchIMGHandler, -1);
-			_prevImgBtn.x 	= int( -stage.stageWidth * .5 + 50 );
-			_prevImgBtn.scaleX = -1;
-			addChild(_prevImgBtn);
-			
-		}
-		
-		private function switchIMGHandler(offset:int):void 
-		{
-			enable = false;
-			dispatchEvent(new UIEvent(UIEvent.SWITCH_IMG, offset));
-		}
-		
+		/**
+		 * create and show new image
+		 * @param type - type of image view
+		 * @param bitmap - image source
+		 */
 		public function showNextImg(type:String, bitmap:Bitmap):void
 		{
 			_nextImg		= _imgFactory.createImg(type, bitmap);
@@ -97,6 +78,9 @@ package imageviewer.views
 			_nextImgBtn.enable = value;
 		}
 		
+		/**
+		 * handler on hiding previous image
+		 */
 		private function onPrevImageHided():void 
 		{
 			if (_currentImg)
@@ -106,6 +90,44 @@ package imageviewer.views
 			_currentImg.show();
 			_nextImg = null;
 			enable = true;
+		}
+		
+		/**
+		 * on aded to stage heandler; creat a UI view
+		 * @param type - type of image view
+		 * @param bitmap - image source
+		 */
+		private function create(e:Event):void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, create);
+			dispatchEvent(new UIEvent(UIEvent.START_UP, null));
+			x = int(stage.stageWidth * .5);
+			y = int(stage.stageHeight * .5);
+			
+			_nextImgBtn 	= new PushButton(LIB_ArrowButton, switchIMGHandler, 1);
+			_nextImgBtn.y 	= int(0 );
+			_nextImgBtn.x 	= int( stage.stageWidth * .5 - 50 );
+			addChild(_nextImgBtn);
+			
+			_prevImgBtn 	= new PushButton(LIB_ArrowButton, switchIMGHandler, -1);
+			_prevImgBtn.y 	= int( 0 );
+			_prevImgBtn.x 	= int( -stage.stageWidth * .5 + 50 );
+			_prevImgBtn.scaleX = -1;
+			addChild(_prevImgBtn);
+			
+			TweenMax.to(_prevImgBtn, 0.2, { alpha:1, y:0, ease:Back.easeOut } );
+			TweenMax.to(_nextImgBtn, 0.2, { alpha:1, y:0, ease:Back.easeOut } );
+			
+		}
+		
+		/**
+		 * handler of switching image
+		 * @param offset - offset according to which will be displayed next image
+		 */
+		private function switchIMGHandler(offset:int):void 
+		{
+			enable = false;
+			dispatchEvent(new UIEvent(UIEvent.SWITCH_IMG, offset));
 		}
 	}
 

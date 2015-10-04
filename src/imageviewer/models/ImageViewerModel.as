@@ -26,7 +26,10 @@ package imageviewer.models
 		}
 		
 		/* INTERFACE imageviewer.models.IModel */
-		
+		/**
+		 * parse list of image
+		 * @param	imgList
+		 */
 		public function loadImgList(imgList:XML):void 
 		{
 			var len:int = imgList.image.length();
@@ -36,6 +39,11 @@ package imageviewer.models
 			}
 		}
 		
+		/**
+		 * return url of image
+		 * @param	offset - offset according to which will be returned image url
+		 * @return url of image
+		 */
 		public function getImgUrl(offset:int):String 
 		{
 			_currentImgInd+=offset;
@@ -46,6 +54,10 @@ package imageviewer.models
 			return _imagesUrl[_currentImgInd];
 		}
 		
+		/**
+		 * prepare image for showing 
+		 * @param	asset
+		 */
 		public function prepareImg(asset:Asset):void 
 		{
 			if (_imagesUrl[_currentImgInd] != asset.url)

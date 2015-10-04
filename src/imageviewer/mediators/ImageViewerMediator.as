@@ -3,7 +3,6 @@ package imageviewer.mediators
 	import flash.display.Bitmap;
 	import flash.events.Event;
 	import imageviewer.models.IModel;
-	import imageviewer.models.ModelEvent;
 	import imageviewer.views.IUIView;
 	import imageviewer.views.signal.SignalTypes;
 	import imageviewer.views.signal.ViewSignal;
@@ -36,7 +35,6 @@ package imageviewer.mediators
 			//super.initialize();
 			addViewListener(UIEvent.SWITCH_IMG, onSwitchImg); 
 			addViewListener(UIEvent.START_UP, onStartUp); 
-			//addContextListener(ModelEvent.SHOW_IMG, onShowImg, ModelEvent);
 			_IMGViewerModel.onImgLoaded.add(onShowImg);
 		}
 		

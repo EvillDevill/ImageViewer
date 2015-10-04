@@ -23,9 +23,6 @@ package imageviewer.controllers
 		[Inject]
 		public var data:Object;
 		
-	/*	[Inject]
-		public var event:UIEvent;*/
-		
 		[Inject]
 		public var service:ILoadService;
 		
@@ -62,6 +59,10 @@ package imageviewer.controllers
 			//_service
 		}
 		
+		/**
+		 * switch current image
+		 * @param offset - offset according to which will be displayed next image
+		 */ 
 		private function changeIMG(offset:int):void 
 		{
 			var imgUrl:String;
@@ -69,6 +70,10 @@ package imageviewer.controllers
 			service.loadImage(imgUrl, imageViewerModel.prepareImg);
 		}
 		
+		/**
+		 * handler of loading list of images
+		 * @param	imgListAsset - loaded asset
+		 */
 		private function onImageListLoaded(imgListAsset:Asset):void 
 		{
 			imageViewerModel.loadImgList(new XML(imgListAsset.data));

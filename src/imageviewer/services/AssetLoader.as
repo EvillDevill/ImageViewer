@@ -18,11 +18,19 @@ package imageviewer.services
 			_onCompleteCallBacks= new Vector.<Function>();
 		}
 		
+		/**
+		 * start load asset file
+		 * @param	onLoadComplete - on load complete handler
+		 */
 		public function load(onLoadComplete:Function):void
 		{
 			throw new Error("This is abstract method. It must be overrid");
 		}
 		
+		/**
+		 * add callback in which, will be transmit loaded asset when loading wil be complete
+		 * @param	callback
+		 */
 		public function addCallback(callback:Function):void
 		{
 			if (_loaded)
@@ -30,9 +38,14 @@ package imageviewer.services
 				callback.call(this, _loadedData);
 				return;
 			}
-			_onCompleteCallBacks.push(callback);
+			if(_onCompleteCallBacks.indexOf(callback)==-1)
+				_onCompleteCallBacks.push(callback);
 		}
 		
+		/**
+		 * apply all callbacks
+		 * @param	callback
+		 */
 		public function applyCallback(obj:Object):void
 		{
 			var i:int;
@@ -40,6 +53,7 @@ package imageviewer.services
 			for (i = 0; i < len; i++) 
 			{
 				_onCompleteCallBacks[i].call(this, obj);
+				_onCompleteCallBacks[i] = null;
 			}
 			_onCompleteCallBacks.splice(0, _onCompleteCallBacks.length);
 		}

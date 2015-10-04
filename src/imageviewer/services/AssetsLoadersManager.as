@@ -49,6 +49,12 @@ package imageviewer.services
 			clearTimeout(_loadTimeout);
 		}
 		
+		/**
+		 * load asset file
+		 * @param	url - asset url
+		 * @param	assetType - asset type
+		 * @param	onComplete - on complete handler
+		 */
 		public function loadAsset(url:String, assetType:String, onComplete:Function):void
 		{
 			if (!_assetsLoaders[url])
@@ -66,6 +72,35 @@ package imageviewer.services
 			}
 		}
 		
+		/**
+		 * unload loaded asset
+		 * @param	assetUrl - url of asset
+		 */
+		public function unload(assetUrl:String):void
+		{
+			if (!_assetsLoaders[assetUrl])
+				return;
+			var assetLoader:AssetLoader = _assetsLoaders[assetUrl];
+			var index:int;
+			index = _loadingTurn.indexOf(assetLoader);
+			if (index != -1)
+			{
+				_currLoadingCount--;
+				_loadingTurn.splice(index, 1);
+			}
+			index = _turnToLoad.indexOf(assetLoader);
+			if (index != -1)
+				_turnToLoad.indexOf(assetLoader);
+			assetLoader.destroy();
+			assetLoader = null;
+		}
+		
+		/**
+		 * metod that creat loader of asset by type
+		 * @param	url - url of asset
+		 * @param	assetType - asset type
+		 * @return loader
+		 */
 		private function createAssetLoader(url:String, assetType:String):AssetLoader 
 		{
 			switch(assetType)
@@ -77,6 +112,9 @@ package imageviewer.services
 			return null;
 		}
 		
+		/**
+		 * launch loading 
+		 */
 		private function load():void 
 		{
 			if (_turnToLoad.length == 0)
@@ -98,25 +136,10 @@ package imageviewer.services
 			_loadTimeout = setTimeout(load, LOAD_DELAY);
 		}
 		
-		public function unload(assetUrl:String):void
-		{
-			if (!_assetsLoaders[assetUrl])
-				return;
-			var assetLoader:AssetLoader = _assetsLoaders[assetUrl];
-			var index:int;
-			index = _loadingTurn.indexOf(assetLoader);
-			if (index != -1)
-			{
-				_currLoadingCount--;
-				_loadingTurn.splice(index, 1);
-			}
-			index = _turnToLoad.indexOf(assetLoader);
-			if (index != -1)
-				_turnToLoad.indexOf(assetLoader);
-			assetLoader.destroy();
-			assetLoader = null;
-		}
-		
+		/**
+		 * on load complete handler
+		 * @param	assetLoader
+		 */
 		private function onLoadComplete(assetLoader:AssetLoader):void 
 		{
 			var index:int = _loadingTurn.indexOf(assetLoader);
