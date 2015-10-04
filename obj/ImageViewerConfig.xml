@@ -8,15 +8,15 @@
   <compiler>
     <define append="true">
       <name>CONFIG::debug</name>
-      <value>true</value>
-    </define>
-    <define append="true">
-      <name>CONFIG::release</name>
       <value>false</value>
     </define>
     <define append="true">
+      <name>CONFIG::release</name>
+      <value>true</value>
+    </define>
+    <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'02.10.2015'</value>
+      <value>'04.10.2015'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -30,24 +30,26 @@
       <name>CONFIG::desktop</name>
       <value>false</value>
     </define>
-    <verbose-stacktraces>true</verbose-stacktraces>
+    <optimize>true</optimize>
+    <omit-trace-statements>true</omit-trace-statements>
+    <verbose-stacktraces>false</verbose-stacktraces>
     <source-path append="true">
-      <path-element>D:\Projects\Flash projects\Test\src</path-element>
+      <path-element>D:\Projects\GitProject\imageViewer\src</path-element>
       <path-element>D:\Programm\FD\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>D:\Projects\Flash projects\Test\lib\Source.swc</path-element>
-      <path-element>D:\Projects\Flash projects\Test\lib\greensock.swc</path-element>
-      <path-element>D:\Projects\Flash projects\Test\lib\as3-signals-v0.9-BETA.swc</path-element>
-      <path-element>D:\Projects\Flash projects\Test\lib\robotlegs-framework-v2.2.1.swc</path-element>
-      <path-element>D:\Projects\Flash projects\Test\lib\robotlegs-extensions-SignalCommandMap.swc</path-element>
+      <path-element>D:\Projects\GitProject\imageViewer\lib\Source.swc</path-element>
+      <path-element>D:\Projects\GitProject\imageViewer\lib\greensock.swc</path-element>
+      <path-element>D:\Projects\GitProject\imageViewer\lib\as3-signals-v0.9-BETA.swc</path-element>
+      <path-element>D:\Projects\GitProject\imageViewer\lib\robotlegs-framework-v2.2.1.swc</path-element>
+      <path-element>D:\Projects\GitProject\imageViewer\lib\robotlegs-extensions-SignalCommandMap.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>D:\Projects\Flash projects\Test\src\Main.as</path-element>
+    <path-element>D:\Projects\GitProject\imageViewer\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#1F1F1F</default-background-color>
-  <default-frame-rate>30</default-frame-rate>
+  <default-frame-rate>60</default-frame-rate>
   <default-size>
     <width>500</width>
     <height>300</height>
